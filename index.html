@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtuality | Electronic Press Kit</title>
+    <style>
+        :root {
+            --primary-color: #00ffff; /* Cyan */
+            --secondary-color: #e6007e; /* Magenta (matching the palm tree logo) */
+            --accent-color: #f7ff00; /* Neon yellow */
+            --dark-color: #0a0a0a;
+            --darker-color: #050505;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --glow-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            --magenta-glow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/800') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, rgba(255,0,255,0.1) 50%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+        
+        #canvas-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: 900;
+            text-shadow: 0 0 10px var(--primary-color);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px var(--primary-color);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--secondary-color);
+            }
+            100% {
+                text-shadow: 0 0 30px var(--accent-color);
+            }
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--primary-color);
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        section:nth-child(odd) {
+            background-color: var(--darker-color);
+        }
+        
+        section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 70px;
+            color: var(--text-color);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        
+        section h2:after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            margin: 20px auto;
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .bio-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        
+        .bio-image {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--glow-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .bio-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+        }
+        
+        .bio-image img {
+            width: 100%;
+            display: block;
+            filter: grayscale(50%) contrast(120%);
+            transition: filter 0.5s ease;
+        }
+        
+        .bio-image:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+        
+        .bio-text {
+            flex: 2;
+        }
+        
+        .bio-text p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .music-item {
+            background-color: rgba(10, 10, 10, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .music-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .music-item img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: filter 0.5s ease, transform 1s ease;
+        }
+        
+        .music-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        
+        .music-info {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .music-info h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .music-info p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .music-info .release-date {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 15px 0;
+            height: 40px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            border-radius: 15px;
+        }
+        
+        .audio-player:hover {
+            opacity: 1;
+        }
+        
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .press-item {
+            background-color: rgba(10, 10, 10, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 255, 0.1);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+        
+        .press-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .press-item blockquote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 0 30px;
+            line-height: 1.8;
+        }
+        
+        .press-item blockquote:before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            left: -15px;
+            top: -30px;
+            color: var(--secondary-color);
+            opacity: 0.3;
+        }
+        
+        .press-item cite {
+            font-weight: 500;
+            display: block;
+            text-align: right;
+            color: var(--secondary-color);
+        }
+        
+        .tour-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: rgba(10, 10, 10, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .tour-table th, .tour-table td {
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .tour-table th {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .tour-table tr {
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .tour-table tr:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+        
+        .tour-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-card {
+            background-color: rgba(10, 10, 10, 0.7);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 20px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+            gap: 25px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--text-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-color);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            z-index: 1;
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+        
+        .cta-button:hover:before {
+            opacity: 1;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-color);
+            color: var(--dark-color);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        footer {
+            background-color: var(--darker-color);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--glow-shadow);
+        }
+        
+        .visualizer {
+            height: 120px;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background-color: rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-top: 60px;
+            margin-bottom: 0;
+        }
+        
+        .bar {
+            position: absolute;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+            margin: 0 2px;
+            border-radius: 10px 10px 0 0;
+            animation: equalize 0.8s infinite ease-in-out;
+            opacity: 0.7;
+        }
+        
+        @keyframes equalize {
+            0% {
+                height: 5px;
+            }
+            50% {
+                height: var(--height, 30px);
+            }
+            100% {
+                height: 5px;
+            }
+        }
+        
+        .music-preview {
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .preview-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+            box-shadow: var(--magenta-glow);
+        }
+        
+        .preview-track-info {
+            flex: 1;
+        }
+        
+        .progress-container {
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 20%;
+            border-radius: 5px;
+            transition: width 0.1s linear;
+        }
+        
+        .track-time {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .floating-particles canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 50px;
+        }
+        
+        .gallery-image {
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            height: 200px;
+            position: relative;
+        }
+        
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-image:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--glow-shadow);
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .bio-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                color: var(--primary-color);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            section h2 {
+                font-size: 2.2rem;
+                margin-bottom: 50px;
+            }
+            
+            .press-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tour-table {
+                font-size: 0.9rem;
+            }
+            
+            .tour-table th, .tour-table td {
+                padding: 15px 10px;
+            }
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .mobile-menu .nav-links {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .mobile-menu .nav-links li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu .nav-links a {
+            font-size: 1.5rem;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--primary-color);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- Three.js for particle effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 400 400" style="display: inline-block; vertical-align: middle;">
+                    <path fill="white" d="M200,0 C310.457,0 400,89.543 400,200 C400,310.457 310.457,400 200,400 C89.543,400 0,310.457 0,200 C0,89.543 89.543,0 200,0 Z M180,120 C160,140 150,160 145,170 C140,180 135,190 130,210 C160,190 170,180 175,170 C180,160 185,150 180,120 Z M210,90 C215,110 220,120 230,130 C240,140 250,150 270,155 C250,125 240,115 230,105 C220,95 210,95 210,90 Z M90,200 L90,220 L110,220 L110,240 L130,240 L130,220 L150,220 L150,240 L170,240 L170,220 L190,220 L190,200 L90,200 Z" />
+                </svg>
+                <span style="display: inline-block; vertical-align: middle; margin-left: 5px;">VIRTUALITY</span>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#music">Music</a></li>
+                <li><a href="#press">Press</a></li>
+                <li><a href="#tours">Tour Dates</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="mobile-menu">
+        <div class="close-menu">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#bio">Bio</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#press">Press</a></li>
+            <li><a href="#tours">Tour Dates</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="floating-particles">
+        <canvas id="particles"></canvas>
+    </div>
+
+    <section class="hero">
+        <canvas id="canvas-background"></canvas>
+        <div class="hero-content">
+            <svg width="280" height="100" viewBox="0 0 600 200" style="margin-bottom: 20px;">
+                <circle cx="300" cy="100" r="100" fill="#e6007e"/>
+                <path fill="white" d="M300,50 C290,60 285,70 280,80 C275,90 270,110 280,120 C290,110 295,100 300,90 C305,80 310,70 300,50 Z"/>
+                <path fill="white" d="M300,200 L300,180 L320,180 L340,180 L340,200 L320,200 Z"/>
+            </svg>
+            <h1 style="margin-top: 0;">VIRTUALITY</h1>
+            <p>DIGITAL DIMENSIONS OF SOUND</p>
+            <div class="preview-player">
+                <div class="play-button" id="hero-play">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="preview-track-info">
+                    <div style="color: var(--primary-color); font-weight: 500;">FEATURED TRACK: "DIGITAL EXISTENCE"</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <div class="track-time">
+                        <span>0:00</span>
+                        <span>3:45</span>
+                    </div>
+                </div>
+            </div>
+            <a href="#contact" class="cta-button">Book Now</a>
+        </div>
+    </section>
+
+    <section id="bio" class="container">
+        <h2>Biography</h2>
+        <div class="bio-content">
+            <div class="bio-image">
+                <div class="bio-image" style="position: relative; overflow: hidden;">
+                    <img src="/api/placeholder/400/400" alt="Virtuality" style="width: 100%; display: block;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.4);">
+                        <svg width="200" height="200" viewBox="0 0 400 400">
+                            <path fill="white" d="M200,0 C310.457,0 400,89.543 400,200 C400,310.457 310.457,400 200,400 C89.543,400 0,310.457 0,200 C0,89.543 89.543,0 200,0 Z M180,120 C160,140 150,160 145,170 C140,180 135,190 130,210 C160,190 170,180 175,170 C180,160 185,150 180,120 Z M210,90 C215,110 220,120 230,130 C240,140 250,150 270,155 C250,125 240,115 230,105 C220,95 210,95 210,90 Z M90,200 L90,220 L110,220 L110,240 L130,240 L130,220 L150,220 L150,240 L170,240 L170,220 L190,220 L190,200 L90,200 Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bio-text">
+                <p>Virtuality emerged from the digital frontier with a distinctive sound that bridges the gap between reality and the virtual world. Known for creating atmospheric soundscapes layered with intricate beats and immersive textures, Virtuality has established a growing presence on platforms like DROP and Emanate.live where forward-thinking electronic music finds its audience.</p>
+                <p>With a production style that draws from a diverse palette of influences including progressive house, techno, ambient, and experimental electronic, Virtuality crafts sonic journeys that transport listeners to ethereal digital dimensions. Each track is meticulously designed to create emotional resonance while maintaining a strong connection to the dancefloor.</p>
+                <p>Virtuality's commitment to exploring the relationship between technology and human experience is reflected not only in music but also in innovative approaches to digital presence and distribution. By embracing blockchain-based platforms and next-generation music technology, Virtuality represents a new breed of electronic artist defining the future of music in the digital age.</p>
+            </div>
+        </div>
+        
+        <div class="visualizer">
+            <!-- Bars will be added by JavaScript -->
+        </div>
+    </section>
+
+    <section id="music">
+        <div class="container">
+            <h2>Latest Releases</h2>
+            <div class="music-grid">
+                <div class="music-item">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="/api/placeholder/400/200" alt="Album 1">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,255,255,0.3) 0%, rgba(230,0,126,0.3) 100%);"></div>
+                    </div>
+                    <div class="music-info">
+                        <h3>Virtual Reality EP</h3>
+                        <p class="release-date">Released: February 18, 2023</p>
+                        <p>Five tracks that blend progressive house with ambient textures, creating immersive digital landscapes.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="#" class="cta-button">Stream</a>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="/api/placeholder/400/200" alt="Album 2">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,255,255,0.3) 0%, rgba(230,0,126,0.3) 100%);"></div>
+                    </div>
+                    <div class="music-info">
+                        <h3>Metaverse Echoes</h3>
+                        <p class="release-date">Released: October 24, 2022</p>
+                        <p>Debut album featuring 10 tracks exploring the boundaries between reality and digital existence, exclusively on DROP and Emanate.live.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="#" class="cta-button">Stream</a>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div style="position: relative; overflow: hidden;">
+                        <img src="/api/placeholder/400/200" alt="Album 3">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,255,255,0.3) 0%, rgba(230,0,126,0.3) 100%);"></div>
+                    </div>
+                    <div class="music-info">
+                        <h3>Digital Artifacts</h3>
+                        <p class="release-date">Released: June 17, 2022</p>
+                        <p>Collaborative EP featuring remixes and original tracks with emerging artists from the web3 music space.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="#" class="cta-button">Stream</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="container">
+        <h2>Press & Reviews</h2>
+        <div class="press-grid">
+            <div class="press-item">
+                <blockquote>
+                    Virtuality creates digital soundscapes that feel tangible and emotionally charged, blending technical precision with an innate understanding of what makes electronic music resonate on a human level.
+                </blockquote>
+                <cite>- Electronic Music Review</cite>
+            </div>
+            <div class="press-item">
+                <blockquote>
+                    "Metaverse Echoes" represents the future of electronic music distribution and creation, with Virtuality leveraging web3 platforms to deliver an authentic artistic vision uncompromised by traditional industry constraints.
+                </blockquote>
+                <cite>- Future Music Platform</cite>
+            </div>
+            <div class="press-item">
+                <blockquote>
+                    Virtuality's virtual set on DROP's digital stage demonstrated the potential of immersive online music experiences, creating an intimate connection with the audience despite the physical distance.
+                </blockquote>
+                <cite>- Web3 Music Journal</cite>
+            </div>
+            <div class="press-item">
+                <blockquote>
+                    What distinguishes Virtuality in the crowded electronic music space is an unwavering commitment to artistic authenticity and technological innovation, creating music that feels equally at home in headphones or on festival sound systems.
+                </blockquote>
+                <cite>- Digital Music Trends</cite>
+            </div>
+        </div>
+    </section>
+
+    <section id="tours">
+        <div class="container">
+            <h2>Shows</h2>
+            <table class="tour-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>City</th>
+                        <th>Tickets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>April 22, 2023</td>
+                        <td>DROP Virtual Showcase</td>
+                        <td>Online Event</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                        <td>February 18, 2023</td>
+                        <td>Crypto Art Gallery</td>
+                        <td>NFT Exhibition, Virtual</td>
+                        <td><a href="#" class="cta-button">Visit</a></td>
+                    </tr>
+                    <tr>
+                        <td>March 12, 2023</td>
+                        <td>FLUF House</td>
+                        <td>Los Angeles, USA</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>May 6, 2023</td>
+                        <td>Sound Bar</td>
+                        <td>Chicago, USA</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>May 19, 2023</td>
+                        <td>The Exchange</td>
+                        <td>Los Angeles, USA</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>June 10, 2023</td>
+                        <td>Emanate Live Sessions</td>
+                        <td>Online Event</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>July 7-9, 2023</td>
+                        <td>Decentralized Music Festival</td>
+                        <td>Miami, USA</td>
+                        <td><a href="#" class="cta-button">Buy Tickets</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="gallery" class="container">
+        <h2>Gallery</h2>
+        <div class="image-gallery">
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="Live performance">
+                <div class="gallery-overlay">DROP Virtual Stage 2022</div>
+            </div>
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="Festival crowd">
+                <div class="gallery-overlay">Emanate Live Session 2022</div>
+            </div>
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="DJ booth">
+                <div class="gallery-overlay">Web3 Music Summit 2022</div>
+            </div>
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="Studio session">
+                <div class="gallery-overlay">In the studio</div>
+            </div>
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="Press photo">
+                <div class="gallery-overlay">Press Shot 2023</div>
+            </div>
+            <div class="gallery-image">
+                <img src="/api/placeholder/500/500" alt="Album artwork">
+                <div class="gallery-overlay">Metaverse Echoes Artwork</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Management</h3>
+                <p>Merlin Chase</p>
+                <p>management@virtuality.io</p>
+                <p>+1 (555) 123-4567</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Booking</h3>
+                <p>Magnetic Media</p>
+                <p>booking@virtuality.io</p>
+                <p>+1 (555) 987-6543</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-newspaper"></i>
+                <h3>Press</h3>
+                <p>Jada Rivera</p>
+                <p>press@virtuality.io</p>
+                <p>+1 (555) 456-7890</p>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+            <a href="#" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="#" class="cta-button">
+                <i class="fas fa-download"></i> Download Full EPK
+            </a>
+        </div>
+    </section>
+
+    <div class="lightbox">
+        <div class="close-lightbox"><i class="fas fa-times"></i></div>
+        <img src="" alt="Enlarged image">
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <svg width="60" height="60" viewBox="0 0 400 400" style="display: inline-block; vertical-align: middle;">
+                    <path fill="white" d="M200,0 C310.457,0 400,89.543 400,200 C400,310.457 310.457,400 200,400 C89.543,400 0,310.457 0,200 C0,89.543 89.543,0 200,0 Z M180,120 C160,140 150,160 145,170 C140,180 135,190 130,210 C160,190 170,180 175,170 C180,160 185,150 180,120 Z M210,90 C215,110 220,120 230,130 C240,140 250,150 270,155 C250,125 240,115 230,105 C220,95 210,95 210,90 Z M90,200 L90,220 L110,220 L110,240 L130,240 L130,220 L150,220 L150,240 L170,240 L170,220 L190,220 L190,200 L90,200 Z" />
+                </svg>
+                <span style="display: inline-block; vertical-align: middle; margin-left: 10px;">VIRTUALITY</span>
+            </div>
+            <p>&copy; 2023 VIRTUALITY. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="https://facebook.com/not_virtuality" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/not_virtuality" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/not_virtuality" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://youtube.com/not_virtuality" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://emanate.live/virtuality" aria-label="Emanate"><i class="fas fa-music"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.add('active');
+        });
+        
+        document.querySelector('.close-menu').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.remove('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                document.querySelector('.mobile-menu').classList.remove('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Audio player toggle
+        const heroPlayButton = document.getElementById('hero-play');
+        let isPlaying = false;
+        
+        heroPlayButton.addEventListener('click', function() {
+            if (isPlaying) {
+                this.innerHTML = '<i class="fas fa-play"></i>';
+                isPlaying = false;
+            } else {
+                this.innerHTML = '<i class="fas fa-pause"></i>';
+                isPlaying = true;
+                
+                // Simulate progress bar movement
+                let width = 0;
+                const progressBar = document.querySelector('.progress-bar');
+                const interval = setInterval(() => {
+                    width += 1;
+                    progressBar.style.width = width + '%';
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        heroPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+                        isPlaying = false;
+                        progressBar.style.width = '0%';
+                    }
+                }, 100);
+            }
+        });
+        
+        // Create audio visualizer bars
+        const visualizer = document.querySelector('.visualizer');
+        const numberOfBars = Math.floor(window.innerWidth / 7); // Adjust based on screen width
+        
+        for (let i = 0; i < numberOfBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.left = i * 7 + 'px';
+            bar.style.setProperty('--height', Math.floor(Math.random() * 100) + 20 + 'px');
+            bar.style.animationDelay = Math.random() * 0.5 + 's';
+            visualizer.appendChild(bar);
+        }
+        
+        // Update visualizer on window resize
+        window.addEventListener('resize', () => {
+            visualizer.innerHTML = '';
+            const newNumberOfBars = Math.floor(window.innerWidth / 7);
+            
+            for (let i = 0; i < newNumberOfBars; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.left = i * 7 + 'px';
+                bar.style.setProperty('--height', Math.floor(Math.random() * 100) + 20 + 'px');
+                bar.style.animationDelay = Math.random() * 0.5 + 's';
+                visualizer.appendChild(bar);
+            }
+        });
+        
+        // Gallery lightbox
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox img');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        
+        galleryImages.forEach(image => {
+            image.addEventListener('click', () => {
+                const imgSrc = image.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'flex';
+            });
+        });
+        
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+        
+        // Canvas background effect for hero section
+        const canvas = document.getElementById('canvas-background');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 255, 255, ' : 'rgba(255, 0, 255, ';
+                this.alpha = Math.random() * 0.5 + 0.1;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width || this.x < 0) {
+                    this.speedX = -this.speedX;
+                }
+                
+                if (this.y > canvas.height || this.y < 0) {
+                    this.speedY = -this.speedY;
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color + this.alpha + ')';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+        
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // Connect nearby particles with lines
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(0, 255, 255, ' + (1 - distance/100) * 0.2 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(drawParticles);
+        }
+        
+        drawParticles();
+        
+        // Three.js particle background for entire page
+        const particlesCanvas = document.getElementById('particles');
+        
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: particlesCanvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Particle system
+        const particleCount = 1000;
+        const particleGeometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 20;
+            positions[i + 1] = (Math.random() - 0.5) * 20;
+            positions[i + 2] = (Math.random() - 0.5) * 20;
+        }
+        
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ffff,
+            size: 0.05,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particleSystem);
+        
+        camera.position.z = 5;
+        
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particleSystem.rotation.x += 0.0001;
+            particleSystem.rotation.y += 0.0002;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize for Three.js
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Play/pause functionality for audio players
+        document.querySelectorAll('.audio-player').forEach(player => {
+            player.addEventListener('play', () => {
+                // Pause all other players
+                document.querySelectorAll('.audio-player').forEach(otherPlayer => {
+                    if (otherPlayer !== player && !otherPlayer.paused) {
+                        otherPlayer.pause();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
